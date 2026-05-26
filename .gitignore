@@ -1,0 +1,10 @@
+.Target/
+.config/
+configs/
+export/
+options/main/inherited/
+local_settings.json
+*.yy.bak
+*.win
+*.sh
+*.backup
