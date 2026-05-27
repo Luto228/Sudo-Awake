@@ -33,7 +33,7 @@
     {"id":{"name":"obj_first_lvl_bugs","path":"objects/obj_first_lvl_bugs/obj_first_lvl_bugs.yy",},},
     {"id":{"name":"obj_first_lvl_wall","path":"objects/obj_first_lvl_wall/obj_first_lvl_wall.yy",},},
     {"id":{"name":"obj_terminal","path":"objects/obj_terminal/obj_terminal.yy",},},
-    {"id":{"name":"Room1","path":"rooms/Room1/Room1.yy",},},
+    {"id":{"name":"first_lvl_room","path":"rooms/first_lvl_room/first_lvl_room.yy",},},
     {"id":{"name":"spr_bridge","path":"sprites/spr_bridge/spr_bridge.yy",},},
     {"id":{"name":"spr_character_attack_sword","path":"sprites/spr_character_attack_sword/spr_character_attack_sword.yy",},},
     {"id":{"name":"spr_character_die","path":"sprites/spr_character_die/spr_character_die.yy",},},
@@ -48,7 +48,7 @@
   "resourceType":"GMProject",
   "resourceVersion":"2.0",
   "RoomOrderNodes":[
-    {"roomId":{"name":"Room1","path":"rooms/Room1/Room1.yy",},},
+    {"roomId":{"name":"first_lvl_room","path":"rooms/first_lvl_room/first_lvl_room.yy",},},
   ],
   "templateType":"game",
   "TextureGroups":[

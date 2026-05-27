@@ -1,2 +1,2 @@
-/// @description: debounce = true
+/// @description: decounce = true
 debounce = true;

@@ -36,3 +36,14 @@ if (hp <= 0) {
     sprite_index = spr_character_die
 }
 #endregion
+#region collision_with_emply_place
+if (place_meeting(x, y, obj_empty_place)) {
+    if (!place_meeting(x, y, obj_bridge)) {
+        if (obj_empty_place.debounce == true) {
+			hp -= obj_empty_place.damage;
+			obj_empty_place.debounce = false
+			obj_empty_place.alarm[0] = 60
+		}
+	}
+}
+#endregion
