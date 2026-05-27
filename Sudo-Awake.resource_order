@@ -1,13 +1,15 @@
 {
   "FolderOrderSettings":[
     {"name":"backgrounds","order":2,"path":"folders/backgrounds.yy",},
+    {"name":"bridge","order":7,"path":"folders/bridge.yy",},
     {"name":"bugs","order":4,"path":"folders/bugs.yy",},
     {"name":"empty","order":5,"path":"folders/empty.yy",},
-    {"name":"terminal","order":6,"path":"folders/terminal.yy",},
     {"name":"main_character","order":1,"path":"folders/main_character.yy",},
+    {"name":"terminal","order":6,"path":"folders/terminal.yy",},
     {"name":"walls","order":3,"path":"folders/walls.yy",},
   ],
   "ResourceOrderSettings":[
+    {"name":"obj_bridge","order":1,"path":"objects/obj_bridge/obj_bridge.yy",},
     {"name":"obj_character","order":3,"path":"objects/obj_character/obj_character.yy",},
     {"name":"obj_empty_place","order":1,"path":"objects/obj_empty_place/obj_empty_place.yy",},
     {"name":"obj_first_lvl_bugs","order":1,"path":"objects/obj_first_lvl_bugs/obj_first_lvl_bugs.yy",},

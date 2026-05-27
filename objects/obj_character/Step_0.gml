@@ -6,20 +6,33 @@ var _up    = keyboard_check(ord("W"));
 
 move_x = _right - _left;
 move_y = _down - _up;
+var _can_move = (!variable_global_exists("terminal_active") || global.terminal_active != true);
 
-if (!place_meeting(x + move_x * spd, y, obj_first_lvl_wall) && (!variable_global_exists("terminal_active") || global.terminal_active != true)) {
-	x = x + move_x * spd;
+if (_can_move) {
+    
+    repeat(spd) {
+        if (!place_meeting(x + move_x, y, obj_first_lvl_wall)) {
+            x += move_x;
+        } else {
+            break;
+        }
+    }
+
+    repeat(spd) {
+        if (!place_meeting(x, y + move_y, obj_first_lvl_wall)) {
+            y += move_y;
+        } else {
+            break;
+        }
+    }
 }
 
-if (!place_meeting(x, y + move_y * spd, obj_first_lvl_wall) && (!variable_global_exists("terminal_active") || global.terminal_active != true)) {
-	y = y + move_y * spd;
-}
 if (move_x != 0) {
     image_xscale = saved_width * move_x; 
 }
 #endregion
 #region destroy()
 if (hp <= 0) {
-	instance_destroy()
+    instance_destroy();
 }
 #endregion
