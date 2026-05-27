@@ -25,3 +25,11 @@ A 2D top-down action/arcade game built with **GameMaker**, featuring pixel-perfe
 2. Clone this repository:
    ```bash
    git clone [https://github.com/your_username/Sudo-Awake.git](https://github.com/your_username/Sudo-Awake.git)
+Open the .yyp project file inside the GameMaker IDE.
+
+Press F5 (or click the Run button) to launch the game.
+
+## 🎹 Controls
+WASD / Arrow Keys — Character movement.
+
+Tab — Open/close the cheat terminal.
