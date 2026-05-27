@@ -31,8 +31,8 @@ if (move_x != 0) {
     image_xscale = saved_width * move_x; 
 }
 #endregion
-#region destroy()
+#region die
 if (hp <= 0) {
-    instance_destroy();
+    sprite_index = spr_character_die
 }
 #endregion
