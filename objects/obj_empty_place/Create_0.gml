@@ -1,3 +1,3 @@
 /// @description: variables
-damage = 20;
+damage = 80;
 debounce = true;

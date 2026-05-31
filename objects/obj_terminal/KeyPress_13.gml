@@ -5,74 +5,112 @@ if (global.terminal_active == true) {
 	terminal_str = "";
 	global.terminal_active = false;
 var _trim_take_str = string_trim(string_lower(_take_str));
-var _find_colon = string_pos(":", _trim_take_str);
-var _main_part = string_trim(string_copy(_trim_take_str, 1, _find_colon-1));
-var _after_main = string_trim(string_copy(_trim_take_str, _find_colon +1, 100));
+var _main_split = string_split(_trim_take_str, ":");
+var _limit = 100;
 
-if (_find_colon != 0) {
-	if _main_part == "me" {
-		var _me = obj_character;
-		var _me_action = string_trim(string_copy(_trim_take_str, _find_colon+1, 100)); 
-		var _action_count = string_pos(" ", _me_action);
-		var _final_action = string_copy(_me_action, 1, _action_count - 1);
-		var _final_count = string_copy(_me_action, _action_count +1, 100);
-		if (_final_action == "speed") {
-			if (string_digits(_final_count) == _final_count && _final_count != "") {
-				if real(_final_count) <= 100 {
-					_me.spd = real(_final_count);
-				} else {
-					_me.spd = 100;
-				}
-			} else {
-				show_message("Error: write number, not string!");
-			}
-		} else if (_final_action == "health") {
-			if (string_digits(_final_count) == _final_count && _final_count != "") {
-				if real(_final_count) <= 100 {
-					_me.hp = real(_final_count);
-				} else {
-					_me.hp = 100
-				}
-			} else {
-				show_message("Error: write number, not string!");
-			}
+if (array_length(_main_split) == 2) {
+	var _plr = obj_character;
+	if _main_split[0] == "me" {
+		var _action_split = string_split(string_trim(_main_split[1]), " ");
+		var _me_action = _action_split[0];
+		if (array_length(_action_split) != 2) {
+			exit;
 		}
-	} else if _main_part == "evil" {
-		var _evil = obj_first_lvl_bugs;
-	} else if _main_part == "bridge" {
-		var _bridge = obj_bridge;
-		var _plr_x = obj_character.x;
-		var _plr_y = obj_character.y;
-		var _space_action = string_pos(" ", _after_main);
-		if (_space_action != 0) {
-			var _bridge_action = string_trim(string_copy(_after_main, 1, _space_action - 1));
-			if (_bridge_action == "create") {
-				var _bridge_coord = string_trim(string_copy(_after_main, _space_action+1, 100));
-				var _bridge_x_y = string_pos(",", _bridge_coord);
-				if (_bridge_x_y != 0) {
-					var _bridge_x = string_trim(string_copy(_bridge_coord, 1, _bridge_x_y - 1));
-					var _bridge_y = string_trim(string_copy(_bridge_coord, _bridge_x_y + 1, 100));
-					var _x_coord = string_digits(_bridge_x);
-					var _y_coord = string_digits(_bridge_y);
-					var _multiple_x = string_char_at(_bridge_x, 1);
-					var _multiple_y = string_char_at(_bridge_y, 1);
-					var _final_multiple_x = (_multiple_x == "-") ? -1: 1;
-					var _final_multiple_y = (_multiple_y == "-") ? -1: 1;
-					if (_x_coord != "" && _y_coord != "") {
-						var _final_bridge_coord_x = real(_x_coord) * _final_multiple_x;
-						var _final_bridge_coord_y = real(_y_coord) * _final_multiple_y;
-						var _bridge_spawn_x = _plr_x + _final_bridge_coord_x;
-						var _bridge_spawn_y = _plr_y + _final_bridge_coord_y;
-						instance_create_depth(_bridge_spawn_x, _bridge_spawn_y, bridge_depth, _bridge);
-					}
-				} else {
-					instance_create_depth(_plr_x, _plr_y, bridge_depth, obj_bridge);
-				}
+		var _me_count = string_digits(_action_split[1]);
+		if (_me_count != "") {
+			_me_count = real(_me_count);
+			if (_me_count > 100) {
+				_me_count = 100;
+			} else if (_me_count < 0) {
+				_me_count = 0;
 			}
-		}  else {
-				if (_after_main == "create") {
-					instance_create_depth(_plr_x, _plr_y, bridge_depth, obj_bridge)
+		} else {
+			exit;
+		}
+		switch _me_action {
+			case "health":
+			case "hp":
+				_plr.hp = _me_count;
+				break;
+			case "speed":
+			case "spd":
+			case "sp":
+				_plr.spd = _me_count;
+				break;
+		}
+	} else if (string_starts_with(_main_split[0], "evil")) {
+		
+		var _evil_where = string_split(_main_split[0], " ");
+		if (array_length(_evil_where) == 2) {
+			_evil_where = _evil_where[1];
+		}
+		switch _evil_where {
+			case "near":
+			var _evil = instance_nearest(_plr.x, _plr.y, obj_enemy_parent);
+			var _distance = point_distance(_plr.x, _plr.y, _evil.x, _evil.y);
+			if (_distance > 150) {
+				exit;
+			}
+			var _evil_after_main = string_split(string_trim(_main_split[1]), " ");
+			if (array_length(_evil_after_main) == 1 && _evil_after_main[0] == "kill") {
+				_evil.hp = 0;
+				exit;
+			}
+			if (array_length(_evil_after_main) != 2) {
+				exit;
+			}
+			var _evil_action = _evil_after_main[0];
+			var _evil_action_count = string_digits(_evil_after_main[1]);
+			if (_evil_action_count != "") {
+				_evil_action_count = real(_evil_action_count)
+			}
+			if (_evil_action_count > 100) {
+				_evil_action_count = 100;
+			} else if (_evil_action_count <= 0) {
+				_evil_action_count = 1;
+			}
+			switch _evil_action {
+				case "health":
+				case "hp":
+					_evil.hp = _evil_action_count;
+					break;
+				case "speed":
+				case "spd":
+				case "sp":
+					_evil.spd = _evil_action_count;
+					break;
+			}
+			break;
+		}
+	} else if (_main_split[0] == "bridge") {
+		
+		
+		var _bridge = obj_bridge;
+		var _bridge_split = string_split(string_trim(_main_split[1]), " ");
+		if (array_length(_bridge_split) == 1 && _bridge_split[0] == "create") {
+			instance_create_depth(_plr.x, _plr.y, -1, obj_bridge);
+			exit;
+		} else if (array_length(_bridge_split) > 2){
+			exit;
+		}
+		
+		var _bridge_what = _bridge_split[0];
+		switch _bridge_what {
+			case "create":
+				var _bridge_where = string_trim(_bridge_split[1]);
+				var _bridge_coords = string_split(_bridge_where, ",");
+				if (array_length(_bridge_coords) != 2) {
+					exit;
 				}
+				try {
+					var _bridge_x = real(_bridge_coords[0]);
+					var _bridge_y = real(_bridge_coords[1]);
+					instance_create_depth(_plr.x + _bridge_x, _plr.y + _bridge_y, -1, _bridge);
+				} 
+				catch (_exception) {
+					exit;
+				}
+				break;
 		}
 	}
 }

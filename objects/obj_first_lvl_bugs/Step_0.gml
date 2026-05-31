@@ -7,7 +7,7 @@ if (hp <= 0){
 if (instance_exists(obj_character)) {
 	plr_x = obj_character.x;
 	plr_y = obj_character.y;
-	if (distance_to_object(obj_character) > 5 && distance_to_object(obj_character) < 175 ) {
+	if (distance_to_object(obj_character) > 5 && distance_to_object(obj_character) < see_distance ) {
 		mp_potential_step(plr_x, plr_y, spd, obj_first_lvl_wall);	
 		image_angle = point_direction(x, y, plr_x, plr_y) - 90;
 	} else {

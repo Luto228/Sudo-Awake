@@ -37,7 +37,7 @@
   ],
   "name":"spr_bridge",
   "nineSlice":null,
-  "origin":0,
+  "origin":1,
   "parent":{
     "name":"bridge",
     "path":"folders/bridge.yy",
@@ -131,7 +131,7 @@
     ],
     "visibleRange":null,
     "volume":1.0,
-    "xorigin":0,
+    "xorigin":43,
     "yorigin":0,
   },
   "swatchColours":null,
