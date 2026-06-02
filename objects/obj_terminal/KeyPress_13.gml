@@ -11,33 +11,13 @@ var _limit = 100;
 if (array_length(_main_split) == 2) {
 	var _plr = obj_character;
 	if _main_split[0] == "me" {
-		var _action_split = string_split(string_trim(_main_split[1]), " ");
-		var _me_action = _action_split[0];
-		if (array_length(_action_split) != 2) {
+		var _me_action_split = string_split(string_trim(_main_split[1]), " ");
+		if (array_length(_me_action_split) != 2) {
 			exit;
 		}
-		var _me_count = string_digits(_action_split[1]);
-		if (_me_count != "") {
-			_me_count = real(_me_count);
-			if (_me_count > 100) {
-				_me_count = 100;
-			} else if (_me_count < 0) {
-				_me_count = 0;
-			}
-		} else {
-			exit;
-		}
-		switch _me_action {
-			case "health":
-			case "hp":
-				_plr.hp = _me_count;
-				break;
-			case "speed":
-			case "spd":
-			case "sp":
-				_plr.spd = _me_count;
-				break;
-		}
+		var _me_action = _me_action_split[0];
+		var _me_action_count = _me_action_split[1];
+		scr_command_me(_plr, _me_action, _me_action_count);
 	} else if (string_starts_with(_main_split[0], "evil")) {
 		
 		var _evil_where = string_split(_main_split[0], " ");

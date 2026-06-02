@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_command_me",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_command_me",
+  "parent":{
+    "name":"terminal_commands",
+    "path":"folders/terminal_commands.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}
